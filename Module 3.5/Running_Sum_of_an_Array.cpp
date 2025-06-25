@@ -1,10 +1,10 @@
 #include<bits/stdc++.h>
 using namespace std;
-vector<int> sum(vector<int>& a, int n)
+vector<int> sum(vector<int>& a)
 {
-    vector<int> result(n);
+    vector<int> result(a.size());
     result[0] = a[0];
-    for(int i=1; i<n; i++)
+    for(int i=1; i<a.size(); i++)
     {
        result[i] = result[i-1] + a[i];
     }
@@ -19,7 +19,7 @@ int main()
     {
         cin >> a[i];
     }
-    vector<int> val = sum(a, n);
+    vector<int> val = sum(a);
     for(int i=0; i<n; i++)
     {
         cout << val[i] << " ";
