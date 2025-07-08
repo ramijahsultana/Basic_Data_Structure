@@ -1,0 +1,170 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node
+{
+public:
+    int val;
+    Node *next;
+    Node(int val)
+    {
+        this->val = val;
+        this->next = NULL;
+    }
+};
+
+void Inser_at_head(Node *&head,Node *&tail, int val)
+{
+    Node *new_node = new Node(val);
+    if (head == NULL)
+    {
+        head = new_node;
+        tail = new_node;
+        return;
+    }
+    new_node->next = head;
+    head = new_node;
+}
+void Inser_at_tail(Node *&head, Node *&tail, int val)
+{
+    Node *newnode = new Node(val);
+    if (head == NULL)
+    {
+        head = newnode;
+        tail = newnode;
+        return;
+    }
+    tail->next = newnode;
+    tail = tail->next;
+}
+
+void Inser_at_any_pos(Node *&head, int idx, int val)
+{
+    Node *newnode = new Node(val);
+    Node *temp = head;
+    for (int i = 1; i < idx; i++)
+    {
+        temp = temp->next;
+    }
+    newnode->next = temp->next;
+    temp->next = newnode;
+}
+
+void Printing_list(Node *head)
+{
+    Node *temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->val << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+int size_of_list(Node *&head)
+{
+
+    Node *temp = head;
+    int count = 0;
+    while (temp != NULL)
+    {
+        count++;
+        temp = temp->next;
+    }
+    return count;
+}
+
+int find_max(Node* &head)
+{
+    
+    if(head == NULL)
+    {
+        return INT_MIN;
+    }
+    int mx = head->val;
+    Node *temp = head->next;
+    while(temp != NULL)
+    {
+        mx = max(mx,temp->val);
+        temp = temp->next;
+    }
+    return mx;
+}
+
+int find_min(Node* &head)
+{
+    
+    if(head == NULL)
+    {
+        return INT_MAX;
+    }
+    int mn = head->val;
+    Node *temp = head->next;
+    while(temp != NULL)
+    {
+        mn = min(mn,temp->val);
+        temp = temp->next;
+    }
+    return mn;
+}
+
+void delete_at_any_pos(Node* head, int idx)
+{
+    Node* temp = head;
+    for(int i=1; i<idx; i++)
+    {
+        temp = temp->next;
+    }
+    Node* deletenode = temp->next;
+    temp->next = temp->next->next;
+    delete deletenode;
+}
+
+int main()
+{
+
+    Node *head = NULL;
+    Node *tail = NULL;
+
+    int val;
+
+    while (1)
+    {
+        cin >> val;
+        if (val == -1)
+        {
+            break;
+        }
+        Inser_at_tail(head, tail, val);
+    }
+    int q;
+    cin >> q;
+    int idx;
+    for (int i = 0; i < q; i++)
+    {
+
+        cin >> idx >> val;
+
+        int sz = size_of_list(head);
+        if (idx > sz)
+        {
+            cout << "Invalid" << endl;
+        }
+        else if (idx == sz)
+        {
+            Inser_at_tail(head, tail, val);
+            Printing_list(head);
+        }
+        else if (idx == 0)
+        {
+            Inser_at_head(head, tail, val);
+            Printing_list(head);
+        }
+        else
+        {
+            Inser_at_any_pos(head, idx, val);
+            Printing_list(head);
+        }
+    }
+
+    return 0;
+}

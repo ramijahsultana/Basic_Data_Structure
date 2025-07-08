@@ -35,11 +35,18 @@ void Printing_list(Node* head)
     }
 
 }
-void delete_node(Node* &head)
+void sort_the_list(Node* head)
 {
-    Node* delete_node = head;
-    head = head->next;
-    delete delete_node;
+    for(Node* i = head; i->next != NULL; i=i->next)
+    {
+        for(Node* j = i->next; j != NULL; j=j->next)
+        {
+            if(i->val < j->val)
+            {
+                swap(i->val, j->val);
+            }
+        }
+    }
 }
 int main()
 {
@@ -55,7 +62,7 @@ int main()
         }
         Inser_at_tail(head, tail, val);
     }
-    delete_node(head);
+    sort_the_list(head);
     Printing_list(head);
 
     return 0;
