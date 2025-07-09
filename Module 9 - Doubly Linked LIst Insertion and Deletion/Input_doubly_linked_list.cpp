@@ -25,34 +25,37 @@ void Print_forward(Node* head)
     cout << endl;
 }
 
-void Insert_at_any_pos(Node* &head, int idx, int val)
+void Insert_at_tail(Node* &head, Node* &tail, int val)
 {
     Node* newnode = new Node(val);
-    Node* temp = head;
-    for(int i = 1; i<idx; i++)
+    if(head == NULL)
     {
-        temp = temp->next;
+        head = newnode;
+        tail = newnode;
+        return;
     }
-    newnode->next = temp->next;
-    temp->next->prev = newnode;
-    temp->next = newnode;
-    newnode->prev = temp;
+    tail->next = newnode;
+    newnode->prev = tail;
+    tail = newnode;
 }
 
 int main()
 {
-    Node* head = new Node(10);
-    Node* a = new Node(20);
-    Node* tail = new Node(30);
+   
+    Node* head = NULL;
+    Node* tail = NULL;
 
-    head->next = a;
-    a->prev = head;
+    int n;
+    while(true)
+    {
+        cin >> n;
+        if(n == -1)
+        {
+            break;
+        }
+        Insert_at_tail(head, tail, n);
+    }
 
-    a->next = tail;
-    tail->prev = a;
-
-    Insert_at_any_pos(head, 3, 15);
-    Insert_at_any_pos(head, 2, 25);
     Print_forward(head);
 
     return 0;

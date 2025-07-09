@@ -40,14 +40,18 @@ int main()
 {
     Node* head = new Node(10);
     Node* a = new Node(20);
-    Node* tail = new Node(30);
+    Node* b = new Node(30);
+    Node* tail = new Node(40);
 
     head->next = a;
     a->prev = head;
 
-    a->next = tail;
-    tail->prev = a;
+    a->next = b;
+    b->prev = a;
     
+    b->next = tail;
+    tail->prev = b;
+
     Print_forward(head);
     Print_backward(tail);
     return 0;

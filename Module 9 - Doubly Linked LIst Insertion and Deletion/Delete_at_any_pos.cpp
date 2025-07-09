@@ -25,18 +25,17 @@ void Print_forward(Node* head)
     cout << endl;
 }
 
-void Insert_at_any_pos(Node* &head, int idx, int val)
+void Delete_at_any_pos(Node* head, int idx)
 {
-    Node* newnode = new Node(val);
     Node* temp = head;
     for(int i = 1; i<idx; i++)
     {
         temp = temp->next;
     }
-    newnode->next = temp->next;
-    temp->next->prev = newnode;
-    temp->next = newnode;
-    newnode->prev = temp;
+    Node* delete_node = temp->next;
+    temp->next = delete_node->next;
+    temp->next->prev = temp;
+    delete delete_node;
 }
 
 int main()
@@ -50,10 +49,9 @@ int main()
 
     a->next = tail;
     tail->prev = a;
-
-    Insert_at_any_pos(head, 3, 15);
-    Insert_at_any_pos(head, 2, 25);
+    
+    Delete_at_any_pos(head, 2);
     Print_forward(head);
-
+    
     return 0;
 }
