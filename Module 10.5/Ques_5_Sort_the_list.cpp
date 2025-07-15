@@ -64,9 +64,18 @@ void Print_list_backward(Node *tail)
     cout << endl;
 }
 
-void sort_the_list(Node* head, Node* tail, int val)
+void sort_the_list(Node *head, Node *tail, int val)
 {
-    for(Node* i=head, *j=tail; i!=j && i->prev)
+    for (Node *i = head; i != NULL; i = i->next)
+    {
+        for (Node *j = i->next; j != NULL; j = j->next)
+        {
+            if (i->val > j->val)
+            {
+                swap(i->val, j->val);
+            }
+        }
+    }
 }
 
 int main()
@@ -75,15 +84,17 @@ int main()
     Node *tail = NULL;
 
     int val;
-    
+
     while (true)
     {
         cin >> val;
-        if(val == -1) break;
+        if (val == -1)
+            break;
         Insert_at_tail(head, tail, val);
     }
 
-   
+    sort_the_list(head, tail, val);
+    Print_list_forward(head);
 
     return 0;
 }
