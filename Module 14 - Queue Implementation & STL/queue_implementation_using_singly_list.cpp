@@ -79,7 +79,7 @@ int main()
         q.push(val);
     }
 
-    //cout << q.front() << " " << q.back() << " " << q.size() << endl;
+    cout << q.front() << " " << q.back() << " " << q.size() << endl;
 
     while(!q.empty())
     {
